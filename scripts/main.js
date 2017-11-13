@@ -6,7 +6,7 @@ window.ytPlayer = null;
 window.ytPlaylist = null;
 window.playerId="videoContainer";
 
-var cssRules = document.styleSheets[0].cssRules;
+
 
 //**************************************************************
 // 2. This code loads the IFrame Player API code asynchronously.
