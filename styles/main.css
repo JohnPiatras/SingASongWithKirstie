@@ -1,0 +1,145 @@
+@import url("reset.css");
+
+* {
+	font-family: "Comic Sans MS", sans-serif;
+}
+
+body{
+	background-color:#32D6FF;
+}
+
+#centerContent {
+	width: 90%;
+	min-width:260px;
+	margin-left: auto;
+	margin-right: auto;
+	text-align:center;
+
+}
+
+.navigation {
+	text-align:center;
+	font-size:13px;
+	margin: 5px 0px;
+	padding:5px;
+	background-color: #FBFF2D;
+}
+
+.navigation ul li {
+	display:inline-block;
+	padding:10px;
+	background-color:#32D6FF;
+	margin:10px 10px 0px 10px;
+}
+
+.navigation a {
+	font-size:16pt;
+	font-weight: bold;
+	
+}
+
+#top {
+	padding-bottom:25px;
+}
+
+#top h1 {
+	text-align:center;
+	font-size: 72pt;
+	color: #fbff2d;
+}
+
+.hide {
+	display: none;
+}
+
+.youtubeThumb {
+	width:100%;
+	margin: -10% 0;
+}
+
+.videoThumbnail {
+	border: 5px solid #FBFF2D;
+	
+	border-radius: 20px;
+	width:20%;
+	overflow:hidden;
+	min-width:200px;
+	display:inline-block;
+	margin:20px;
+	vertical-align:top;
+}
+
+.videoThumbnail:hover {
+	animation-name: bounce;
+	animation-duration: 0.5s;
+	animation-direction: alternate;
+	animation-iteration-count: 1;
+	animation-timing-function: linear;
+}
+
+.thumbcaption {
+	color: white;
+    white-space: nowrap;
+    width: 80%;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    margin-left: auto;
+    margin-right: auto;
+    height: 20px;
+    /* overflow-y: hidden; */
+    margin-top: -20px;
+	font-weight:bold;
+}
+
+@keyframes bounce {
+	12% {transform:translate(0, -10px);}
+	24% {transform:translate(0, -15px);}
+	36% {transform:translate(0, -17px);}
+	50% {transform:translate(0, 0);}
+	
+	62% {transform:translate(0, -5px);}
+	74% {transform:translate(0, -8px);}
+	86% {transform:translate(0, -9px);}
+	100%{transform:translate(0, 0);}
+		/*from {background-color: red;}*/
+		/*to {background-color: yellow;}*/
+	  }
+
+
+/*videos are 854x480*/
+
+
+#videoContainer {
+	border: 5px solid #FBFF2D;
+	overflow:hidden;
+	border-radius: 5px;
+	position:fixed;
+	top:0;
+	bottom:0;
+	left:0;
+	right:0;
+	width:95%;
+	padding-bottom:50.625%;
+	height:0;
+	margin: auto;
+}
+
+#videoContainer iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+#fader{
+	position:fixed;
+	width:100%;
+	height:100%;
+	top:0;
+	left:0;
+	background:#000;
+	opacity:0.75;	
+}
+
+
