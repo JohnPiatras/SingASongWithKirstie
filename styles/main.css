@@ -142,4 +142,32 @@ body{
 	opacity:0.75;	
 }
 
+@media only screen and (max-device-width: 480px) {
+	#centerContent {
+		width: 100%;
+		min-width:260px;
+		margin-left: auto;
+		margin-right: auto;
+		text-align:center;
+
+	}
+	
+	#top h1 {
+		text-align:center;
+		font-size: 48pt;
+		color: #fbff2d;
+	}
+	
+	.videoThumbnail {
+		border: 5px solid #FBFF2D;
+		
+		border-radius: 20px;
+		width:40%;
+		overflow:hidden;
+		min-width:200px;
+		display:inline-block;
+		margin:20px;
+		vertical-align:top;
+	}
+}
 
