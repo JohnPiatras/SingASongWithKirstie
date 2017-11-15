@@ -145,43 +145,21 @@ body{
 @media only screen and (max-device-width: 480px) {
 	#centerContent {
 		width: 100%;
-		min-width:260px;
-		margin-left: auto;
-		margin-right: auto;
-		text-align:center;
-
 	}
 	
 	#top h1 {
-		text-align:center;
 		font-size: 48pt;
-		color: #fbff2d;
 	}
 	
 	.videoThumbnail {
-		border: 5px solid #FBFF2D;
-		
-		border-radius: 20px;
 		width:40%;
-		overflow:hidden;
-		min-width:200px;
-		display:inline-block;
-		margin:20px;
-		vertical-align:top;
+		margin:10px;
 	}
 	
 	.thumbcaption {
-		color: white;
-		white-space: nowrap;
 		width: 90%;
-		overflow-x: hidden;
-		text-overflow: ellipsis;
-		margin-left: auto;
-		margin-right: auto;
 		height: 32px;
-		/* overflow-y: hidden; */
 		margin-top: -32px;
-		font-weight:bold;
 		font-size:32px;
 	}
 }
