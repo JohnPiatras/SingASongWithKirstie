@@ -20,8 +20,8 @@ body{
 .navigation {
 	text-align:center;
 	font-size:13px;
-	margin: 5px 0px;
-	padding:5px;
+	margin: 0;
+	padding-bottom:5px;
 	background-color: #FBFF2D;
 }
 
@@ -39,13 +39,19 @@ body{
 }
 
 #top {
+	padding-top:25px;
 	padding-bottom:25px;
+	background-image:url("../images/background.jpg");
+	background-repeat:no-repeat;
+	background-size:cover;
+	background-position:0px -60px;
 }
 
 #top h1 {
 	text-align:center;
 	font-size: 72pt;
 	color: #fbff2d;
+	text-shadow: 5px 5px 10px rgba(0,0,0,0.5);
 }
 
 .hide {
@@ -59,8 +65,8 @@ body{
 
 .videoThumbnail {
 	border: 5px solid #FBFF2D;
-	
 	border-radius: 20px;
+	box-shadow: 5px 5px 10px 1px rgba(0, 0, 0, 0.5);
 	width:20%;
 	overflow:hidden;
 	min-width:200px;
