@@ -48,10 +48,25 @@ body{
 }
 
 #top h1 {
+	width:80%;
+	margin:auto;
 	text-align:center;
-	font-size: 72pt;
+	font-size: 8vw;
 	color: #fbff2d;
 	text-shadow: 5px 5px 10px rgba(0,0,0,0.5);
+}
+
+#fullscreenButton {
+	position:absolute;
+	background-color:blue;
+	border: 5px solid #FBFF2D;
+	border-radius: 8px;
+	box-shadow: 5px 5px 10px 1px rgba(0, 0, 0, 0.5);
+	width:32px;
+	height:32px;
+	right:5px;
+	top:5px;
+	
 }
 
 .hide {
@@ -154,11 +169,11 @@ body{
 	}
 	
 	#top h1 {
-		font-size: 48pt;
+		/*font-size: 48pt;*/
 	}
 	
 	.videoThumbnail {
-		width:40%;
+		width:45%;
 		margin:10px;
 	}
 	

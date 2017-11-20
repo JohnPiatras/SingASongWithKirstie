@@ -23,12 +23,45 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
  ************************************************************/
 function onYouTubeIframeAPIReady() {
 
+	initVideoThumbnails();
+	initYoutTubePlayer();
 
-  initVideoThumbnails();
-  initYoutTubePlayer();
-  
-
+	var fullscreenButton = document.getElementById("fullscreenButton");
+	fullscreenButton.addEventListener('click', onFullscreenButtonClick, false);
 }
+
+function onFullscreenButtonClick() {
+	var fullscreenElement = document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement;
+	
+	if(fullscreenElement == null) {
+		launchIntoFullscreen(document.documentElement);
+	} else {
+		exitFullscreen();
+	}
+}
+
+function launchIntoFullscreen(element) {
+  if(element.requestFullscreen) {
+    element.requestFullscreen();
+  } else if(element.mozRequestFullScreen) {
+    element.mozRequestFullScreen();
+  } else if(element.webkitRequestFullscreen) {
+    element.webkitRequestFullscreen();
+  } else if(element.msRequestFullscreen) {
+    element.msRequestFullscreen();
+  }
+}
+
+function exitFullscreen() {
+  if(document.exitFullscreen) {
+    document.exitFullscreen();
+  } else if(document.mozCancelFullScreen) {
+    document.mozCancelFullScreen();
+  } else if(document.webkitExitFullscreen) {
+    document.webkitExitFullscreen();
+  }
+}
+
 
 //see comments here: https://stackoverflow.com/questions/30081301/getting-all-videos-of-a-channel-using-youtube-api
 //for fetching youtube channel data
