@@ -9,7 +9,7 @@ body{
 }
 
 #centerContent {
-	width: 90%;
+	width: 100%;
 	min-width:260px;
 	margin-left: auto;
 	margin-right: auto;
@@ -86,7 +86,7 @@ body{
 	overflow:hidden;
 	min-width:200px;
 	display:inline-block;
-	margin:20px;
+	margin:15px;
 	vertical-align:top;
 }
 
