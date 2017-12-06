@@ -19,22 +19,105 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 //Called when youtube api is ready
 function onYouTubeIframeAPIReady() {
-
-	initYouTubePlayer();
+	YouTubeContainer.init();
 	initVideoThumbnails();
-
-	var fullscreenButton = document.getElementById("fullscreenButton");
-	fullscreenButton.addEventListener('click', onFullscreenButtonClick, false);
+	FullScreenButton.init();
 }
 
-function initYouTubePlayer() {
-	window.ytPlayer = new YT.Player("ytPlayer", {
-        events: {
-          'onReady': onPlayerReady,
-          'onStateChange': onPlayerStateChange
-        }
-	});
-}
+var YouTubeContainer = {
+	settings: {
+		ytPlayer: null,
+		videoContainerElement: document.getElementById("videoContainer"),
+		faderElement: document.getElementById("fader")
+	},
+
+	init: function() {
+		this.settings.ytPlayer = new YT.Player("ytPlayer", {
+			events: {
+			'onReady': this.onPlayerReady,
+			'onStateChange': this.onPlayerStateChange
+			}
+		});
+	},
+	
+	onPlayerReady: function() {
+	},
+	
+	onPlayerStateChange: function(event) {
+		if (event.data === YT.PlayerState.ENDED) {
+			YouTubeContainer.stopVideo();
+		}
+	if (event.data === YT.PlayerState.PAUSED) {
+			YouTubeContainer.stopVideo();
+		}
+	},
+	
+	stopVideo: function() {
+		this.settings.ytPlayer.stopVideo();
+		this.settings.videoContainerElement.classList.add("hide");
+		this.settings.faderElement.classList.add("hide");
+	},
+	
+	playVideo: function(vId) {
+		this.settings.ytPlayer.loadVideoById(vId);
+		this.settings.faderElement.classList.remove("hide");
+		this.settings.videoContainerElement.classList.remove("hide");
+		this.settings.ytPlayer.playVideo();
+	}
+	
+	
+}	
+ 
+var FullScreenButton = {
+	settings: {
+		fullscreenButton: document.getElementById("fullscreenButton")	
+	},
+	
+	init: function() {
+		this.bindUIActions();
+	},
+	
+	bindUIActions: function() {
+		this.settings.fullscreenButton.addEventListener('click', function() {
+			FullScreenButton.onClick();
+		});
+	},
+	
+	onClick: function() {
+		var fullscreenElement = document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement;
+		if(fullscreenElement == null) {
+			FullScreenButton.launchIntoFullScreen(document.documentElement);
+		} else {
+			FullScreenButton.exitFullScreen();
+		}
+	},
+	
+	launchIntoFullScreen: function(element) {
+		if(element.requestFullscreen) {
+			element.requestFullscreen();
+		} else if(element.mozRequestFullScreen) {
+			element.mozRequestFullScreen();
+		} else if(element.webkitRequestFullscreen) {
+			element.webkitRequestFullscreen();
+		} else if(element.msRequestFullscreen) {
+			element.msRequestFullscreen();
+		}
+	},
+	
+	exitFullScreen: function() {
+		if(document.exitFullscreen) {
+			document.exitFullscreen();
+		} else if(document.mozCancelFullScreen) {
+			document.mozCancelFullScreen();
+		} else if(document.webkitExitFullscreen) {
+			document.webkitExitFullscreen();
+		}
+	}
+
+
+}	
+ 
+
 
 //Grabs a playlist from the SingASongWithKirstie channel on youtube
 //Gets video IDs and creates a series of thumbnails for display on front page
@@ -50,56 +133,37 @@ function initVideoThumbnails() {
 	
     for (var n = 0; n < playlist.items.length; n++) {
 		if(playlist.items[n].kind === "youtube#playlistItem" & playlist.items[n].snippet.resourceId.kind === "youtube#video"){
-			var id = playlist.items[n].snippet.resourceId.videoId;
-			var videoThumbnail = document.createElement("div");
-			videoThumbnail.setAttribute("class", "videoThumbnail");
-			videoThumbnail.setAttribute("id", id);
-			
-			centerContent.appendChild(videoThumbnail);
-			
-			var thumbid = id + '-thumb';
-			var thumbnail = document.createElement("img");
-			thumbnail.setAttribute("src", playlist.items[n].snippet.thumbnails.high.url);
-			thumbnail.setAttribute("id", id + "-thumb");
-			thumbnail.setAttribute("class", "youtubeThumb");
-			thumbnail.addEventListener('click', onThumbnailClick, false);
-			videoThumbnail.appendChild(thumbnail);
-			
-			var thumbcaption = document.createElement("div");
-			thumbcaption.setAttribute("class", "thumbcaption");
-			thumbcaption.innerHTML = playlist.items[n].snippet.title;
-			videoThumbnail.appendChild(thumbcaption);
+			try{
+				var videoInfo = {};
+				videoInfo.id = playlist.items[n].snippet.resourceId.videoId;
+				videoInfo.thumbUrl = playlist.items[n].snippet.thumbnails.high.url;
+				videoInfo.title = playlist.items[n].snippet.title
+		
+				var videoThumbnail = document.createElement("div");
+				videoThumbnail.setAttribute("class", "videoThumbnail");
+				videoThumbnail.setAttribute("id", videoInfo.id);
+				
+				centerContent.appendChild(videoThumbnail);
+				
+				var thumbnail = document.createElement("img");
+				thumbnail.setAttribute("src", videoInfo.thumbUrl);
+				thumbnail.setAttribute("id", videoInfo.id + "-thumb");
+				thumbnail.setAttribute("class", "youtubeThumb");
+				thumbnail.addEventListener('click', onThumbnailClick, false);
+				videoThumbnail.appendChild(thumbnail);
+				
+				var thumbcaption = document.createElement("div");
+				thumbcaption.setAttribute("class", "thumbcaption");
+				thumbcaption.innerHTML = videoInfo.title;
+				videoThumbnail.appendChild(thumbcaption);
+			}catch(err){
+				
+			}
 		}
     }
 	centerContent.classList.remove("hide");
 }
 
-function playVideo(vId) {
-	window.ytPlayer.loadVideoById(vId);
-	window.faderElement.classList.remove("hide");
-	window.videoContainerElement.classList.remove("hide");
-	window.ytPlayer.playVideo();
-}
-
-function stopVideo(){
-	window.ytPlayer.stopVideo();
-	window.videoContainerElement.classList.add("hide");
-	window.faderElement.classList.add("hide");
-}
-
-function onPlayerReady(event) {
-  //event.target.playVideo();
-}
-
-function onPlayerStateChange(event) {
-	if (event.data === YT.PlayerState.ENDED) {
-		stopVideo();
-	}
-	if (event.data === YT.PlayerState.PAUSED) {
-		stopVideo();
-	}
-
-}
 
 /**********************************
  * Handle user interaction events *
@@ -107,7 +171,7 @@ function onPlayerStateChange(event) {
 function onThumbnailClick(event) {
 	var thumb = event.target;
 	var thumbContainer = thumb.parentNode;
-	playVideo(thumbContainer.id);
+	YouTubeContainer.playVideo(thumbContainer.id);
 }
 
 
@@ -128,35 +192,8 @@ function getJSONData(yourUrl) {
 	return Httpreq.responseText;
 }
  
-function onFullscreenButtonClick() {
-	var fullscreenElement = document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement;
-	if(fullscreenElement == null) {
-		launchIntoFullscreen(document.documentElement);
-	} else {
-		exitFullscreen();
-	}
-}
+ 
 
-function launchIntoFullscreen(element) {
-  if(element.requestFullscreen) {
-    element.requestFullscreen();
-  } else if(element.mozRequestFullScreen) {
-    element.mozRequestFullScreen();
-  } else if(element.webkitRequestFullscreen) {
-    element.webkitRequestFullscreen();
-  } else if(element.msRequestFullscreen) {
-    element.msRequestFullscreen();
-  }
-}
 
-function exitFullscreen() {
-  if(document.exitFullscreen) {
-    document.exitFullscreen();
-  } else if(document.mozCancelFullScreen) {
-    document.mozCancelFullScreen();
-  } else if(document.webkitExitFullscreen) {
-    document.webkitExitFullscreen();
-  }
-}
 
 
