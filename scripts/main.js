@@ -160,10 +160,6 @@ function initVideoThumbnails() {
 			}catch(err){
 				console.log("Encountered an error fetching info for a video, ignoring...");
 				console.log(err);
-				try{
-					console.log("  Video title: " + playlist.items[n].snippet.title);
-					console.log("  Video description: " + playlist.items[n].snippet.description);
-				}catch(err2){}
 			}
 		}
     }
