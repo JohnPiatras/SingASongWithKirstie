@@ -131,14 +131,15 @@ function initVideoThumbnails() {
 	var playlist = JSON.parse(getJSONData("https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=" + playlistid + "&key=" + window.apikey));
 	
 	
-    for (var n = 0; n < playlist.items.length; n++) {
+   // for (var n = 0; n < playlist.items.length; n++) {
+	for (var n = playlist.items.length - 1; n >= 0; n--) {
 		if(playlist.items[n].kind === "youtube#playlistItem" & playlist.items[n].snippet.resourceId.kind === "youtube#video"){
 			try{
 				var videoInfo = {};
 				videoInfo.id = playlist.items[n].snippet.resourceId.videoId;
 				videoInfo.thumbUrl = playlist.items[n].snippet.thumbnails.high.url;
-				videoInfo.title = playlist.items[n].snippet.title
-		
+				videoInfo.title = playlist.items[n].snippet.title;		
+
 				var videoThumbnail = document.createElement("div");
 				videoThumbnail.setAttribute("class", "videoThumbnail");
 				videoThumbnail.setAttribute("id", videoInfo.id);
@@ -157,7 +158,12 @@ function initVideoThumbnails() {
 				thumbcaption.innerHTML = videoInfo.title;
 				videoThumbnail.appendChild(thumbcaption);
 			}catch(err){
-				
+				console.log("Encountered an error fetching info for a video, ignoring...");
+				console.log(err);
+				try{
+					console.log("  Video title: " + playlist.items[n].snippet.title);
+					console.log("  Video description: " + playlist.items[n].snippet.description);
+				}catch(err2){}
 			}
 		}
     }
