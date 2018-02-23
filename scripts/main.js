@@ -133,8 +133,8 @@ function FullScreenButton() {
 		this.settings.fullscreenButton.addEventListener('click', self.onClick);
 	};
 	
-	//When onClick is called 'this' will point to the object it was called from, not the object here that owns it?
-	//So, we stored the 'this' we want to use in 'self'
+	//When a function is called as an event handler 'this' is set to the element that fired the event. So, we need to 
+	//store the 'this' that we want to use, in this case we stored it in 'self'.
 	this.onClick = function() {
 		let fullscreenElement = document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement;
 		if(fullscreenElement == null) {
