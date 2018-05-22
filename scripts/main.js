@@ -61,24 +61,25 @@ function initVideoThumbnails() {
 	let videos = getYoutubePlaylist();
 
    // for (let n = 0; n < playlist.items.length; n++) {
-	for (let n = videos.length - 1; n >= 0; n--) {		
+	//for (let n = videos.length - 1; n >= 0; n--) {		
+	videos.forEach( (video) => {
 		let videoThumbnail = document.createElement("div");
 		videoThumbnail.setAttribute("class", "videoThumbnail");
-		videoThumbnail.setAttribute("id", videos[n].id);
+		videoThumbnail.setAttribute("id", video.id);
 		centerContent.appendChild(videoThumbnail);
 		
 		let thumbnail = document.createElement("img");
-		thumbnail.setAttribute("src", videos[n].thumbUrl);
-		thumbnail.setAttribute("id", videos[n].id + "-thumb");
+		thumbnail.setAttribute("src", video.thumbUrl);
+		thumbnail.setAttribute("id", video.id + "-thumb");
 		thumbnail.setAttribute("class", "youtubeThumb");
 		thumbnail.addEventListener('click', onThumbnailClick, false);
 		videoThumbnail.appendChild(thumbnail);
 		
 		let thumbcaption = document.createElement("div");
 		thumbcaption.setAttribute("class", "thumbcaption");
-		thumbcaption.innerHTML = videos[n].title;
+		thumbcaption.innerHTML = video.title;
 		videoThumbnail.appendChild(thumbcaption);
-    }
+    });
 	centerContent.classList.remove("hide");
 }
 

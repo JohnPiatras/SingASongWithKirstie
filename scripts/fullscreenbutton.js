@@ -1,7 +1,11 @@
 //Requires page to contain a element with id "fullscreenButton"
 
+(function(){
+"use strict"
+
 let fullscreenbttn = new FullScreenButton();
 fullscreenbttn.init();
+window.fullscreenbttn = fullscreenbttn;
 
 function FullScreenButton() {
 	let self = this;
@@ -50,3 +54,4 @@ function FullScreenButton() {
 		}
 	};
 }
+})();
