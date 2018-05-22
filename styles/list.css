@@ -5,23 +5,36 @@
 }
 
 body{
-
+	font-size:16pt;
 }
 
 h1 {
-	font-size:16pt;
+	font-size:32pt;
 	margin-bottom:1em;
 }
 
 #centerContent {
 	width:80%;
 	margin:auto;
-
 }
 
 li {
+	padding-top:0.5em;
+	padding-bottom:0.5em;
+}
 
-	list-style-type: decimal;
-	padding-top:5px;
-	padding-bottom:5px;
+ol {
+	margin-left:0;
+	padding-left:0;
+	counter-reset:item
+}
+ol>li {
+	margin-left:0;
+	padding-left:0;
+	counter-increment:item;
+	list-style:none inside
+}
+ol>li:before {
+	content:"(" counter(item) ")";
+	padding-right:1em
 }
