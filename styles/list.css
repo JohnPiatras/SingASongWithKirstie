@@ -1,0 +1,27 @@
+@import url("reset.css");
+
+* {
+	font-family: Chewy, "Comic Sans MS", sans-serif;
+}
+
+body{
+
+}
+
+h1 {
+	font-size:16pt;
+	margin-bottom:1em;
+}
+
+#centerContent {
+	width:80%;
+	margin:auto;
+
+}
+
+li {
+
+	list-style-type: decimal;
+	padding-top:5px;
+	padding-bottom:5px;
+}
