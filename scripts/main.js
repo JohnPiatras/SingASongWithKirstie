@@ -1,7 +1,6 @@
 "use strict"
 
 
-
 // Called when youtube api is ready
 // Note, the IFrame Player API is loaded in youtube.js
 function onYouTubeIframeAPIReady() {
