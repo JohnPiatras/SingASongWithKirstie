@@ -27,16 +27,27 @@
             items = [...items, ...playlist.items];
         }
 
-        return items.map( item => {
-            if(item.snippet.resourceId.kind == "youtube#video"){
-                let new_item = {
-                    title: item.snippet.title,
-                    id: item.snippet.resourceId.videoId,
-                    thumbUrl: item.snippet.thumbnails.high.url,
-                }
-                return new_item;
-            }    
-        });
+        //Changed to use reduce instead of map as I can more easily skip deleted videos rather than returning null elements in the 
+        //array.
+        return items.reduce( (result, item) => {
+            try{
+                if(item.snippet.resourceId.kind == "youtube#video" && item.snippet.title != "Deleted video"){
+                    let new_item = {
+                        title: item.snippet.title,
+                        id: item.snippet.resourceId.videoId,
+                        thumbUrl: item.snippet.thumbnails.high.url,
+                    }
+                    result.push(new_item);  
+                }else{
+                    console.log(`Skipped deleted video at position ${item.snippet.position}`);
+                    console.log(item);
+                }  
+            }catch(err){
+                console.log(err);
+                console.log(item);
+            }
+            return result;
+        }, []); //the [] is just our initial empty array for result
     }
 
     function getJSONData(yourUrl) {
