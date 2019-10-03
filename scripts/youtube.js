@@ -2,7 +2,7 @@
 
     "use strict"
 
-    const API_KEY = "AIzaSyAeBabA_TskH1rKGLOIVX5xt35PvqECuI8";
+    const API_KEY = config.api_key;
 
     //**************************************************************
     // 2. This code loads the IFrame Player API code asynchronously.
